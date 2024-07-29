@@ -23,6 +23,7 @@ export function LoginPage () {
           borderRadius: 2
         }}
       >
+        <Typography variant='h5' sx={{ marginBottom: 1 }}>Login</Typography>
         <Typography variant='h5'>
           <form>
             <Grid container>
