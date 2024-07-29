@@ -8,7 +8,7 @@ export function Sidebar ({ drawerWith = 240 }) {
       component='nav'
       sx={{
         width: { sm: drawerWith },
-        flexShrink: { ms: 0 }
+        flexShrink: { sm: 0 }
       }}
     >
       <Drawer
