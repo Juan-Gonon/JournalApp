@@ -46,9 +46,10 @@ export function LoginPage () {
             >
               <Button variant='contained' fullWidth>
                 <Google />
-                <Typography sx={{
-                  marginLeft: 1
-                }}
+                <Typography
+                  variant='p' sx={{
+                    marginLeft: 1
+                  }}
                 >Google
                 </Typography>
               </Button>
