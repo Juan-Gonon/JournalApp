@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Google } from '@mui/icons-material'
 import { Button, Grid, Link as LinkUI, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
+import { checkingAuthentication, startGoogleSingIn } from '../../store'
 
 export function LoginPage () {
+  const dispatch = useDispatch()
+  const { status } = useSelector((state) => state.auth)
   const { email, password, onInputChange } = useForm({
     email: 'juan@gmail.com',
     password: '123456'
@@ -13,11 +17,15 @@ export function LoginPage () {
   const onSubmitForm = (e) => {
     e.preventDefault()
 
+    dispatch(checkingAuthentication())
+
     console.log({ email, password })
+    console.log(status)
   }
 
   const onGoogleSingIn = () => {
     console.log('onGoogleSingIn')
+    dispatch(startGoogleSingIn())
   }
 
   return (
