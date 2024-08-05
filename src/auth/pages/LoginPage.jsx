@@ -5,6 +5,7 @@ import { Button, Grid, Link as LinkUI, TextField, Typography } from '@mui/materi
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
 import { checkingAuthentication, startGoogleSingIn } from '../../store'
+import { useMemo } from 'react'
 
 export function LoginPage () {
   const dispatch = useDispatch()
@@ -13,6 +14,8 @@ export function LoginPage () {
     email: 'juan@gmail.com',
     password: '123456'
   })
+
+  const isAuthentication = useMemo(() => status === 'checking', [status])
 
   const onSubmitForm = (e) => {
     e.preventDefault()
@@ -76,7 +79,7 @@ export function LoginPage () {
               xs={12}
               sm={6}
             >
-              <Button type='submit' variant='contained' fullWidth>Login</Button>
+              <Button disabled={isAuthentication} type='submit' variant='contained' fullWidth>Login</Button>
             </Grid>
 
             <Grid
@@ -84,7 +87,7 @@ export function LoginPage () {
               xs={12}
               sm={6}
             >
-              <Button variant='contained' fullWidth onClick={onGoogleSingIn}>
+              <Button variant='contained' fullWidth onClick={onGoogleSingIn} disabled={isAuthentication}>
                 <Google />
                 <Typography
                   variant='p' sx={{
