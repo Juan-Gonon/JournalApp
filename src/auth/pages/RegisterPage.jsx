@@ -1,9 +1,9 @@
-import { Button, Grid, Link as LinkUI, TextField, Typography } from '@mui/material'
+import { Alert, Button, Grid, Link as LinkUI, TextField, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { startCreatingUserWithEmailPassword } from '../../store/auth'
 
 const formData = {
@@ -19,9 +19,11 @@ const formValidations = {
 }
 
 export function RegisterPage () {
+  const { status, errorMessage } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const [formSubmitted, setFormSubmitted] = useState(false)
   const { displayName, formState, email, password, onInputChange, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
 
   const onSubmitForm = (e) => {
     e.preventDefault()
@@ -99,8 +101,20 @@ export function RegisterPage () {
               item
               xs={12}
               sm={6}
+              display={errorMessage ? '' : 'none'}
             >
-              <Button type='submit' variant='contained' fullWidth>Crear cuenta</Button>
+              <Alert severity='error'>
+                {
+                  errorMessage
+                }
+              </Alert>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+            >
+              <Button disabled={isCheckingAuthentication} type='submit' variant='contained' fullWidth>Crear cuenta</Button>
             </Grid>
 
           </Grid>
