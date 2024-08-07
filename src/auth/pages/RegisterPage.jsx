@@ -2,24 +2,34 @@ import { Button, Grid, Link as LinkUI, TextField, Typography } from '@mui/materi
 import { Link } from 'react-router-dom'
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
+import { useState } from 'react'
 
 const formData = {
-  email: 'juan@gmail.com',
-  password: '123456',
-  displayName: 'Juan'
+  email: '',
+  password: '',
+  displayName: ''
+}
+
+const formValidations = {
+  email: [(value) => value.includes('@'), 'El email debe de tener una @'],
+  password: [(value) => value.length >= 6, 'El password debe de tener más de 6 letras.'],
+  displayName: [(value) => value.length >= 1, 'El nombre es obligatorio']
 }
 
 export function RegisterPage () {
-  const { displayName, formState, email, password, onInputChange } = useForm(formData)
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const { displayName, formState, email, password, onInputChange, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
   const onSubmitForm = (e) => {
     e.preventDefault()
-
+    console.log(isFormValid)
+    setFormSubmitted(true)
     console.log(formState)
   }
 
   return (
     <AuthLayout title='Crear cuenta'>
+      {/* <h1>FormValid: {!isFormValid ? 'valido' : 'incorrecto'} </h1> */}
       <form onSubmit={onSubmitForm}>
         <Grid container>
           <Grid
@@ -35,6 +45,8 @@ export function RegisterPage () {
               name='displayName'
               value={displayName}
               onChange={onInputChange}
+              error={!!displayNameValid && formSubmitted}
+              helperText={displayNameValid}
             />
           </Grid>
           <Grid
@@ -50,6 +62,8 @@ export function RegisterPage () {
               name='email'
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
             />
           </Grid>
           <Grid
@@ -65,6 +79,8 @@ export function RegisterPage () {
               name='password'
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
             />
           </Grid>
 
