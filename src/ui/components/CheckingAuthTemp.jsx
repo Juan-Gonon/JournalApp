@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from '@mui/material'
 
-export function checkingAuth () {
+export function CheckingAuth () {
   return (
     <Grid
       container

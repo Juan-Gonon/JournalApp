@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthRoutes } from '../auth/router/routes'
 import { JournalRoutes } from '../journal/router/routes'
 import { useDispatch, useSelector } from 'react-redux'
-import { checkingAuth } from '../ui'
+import { CheckingAuth } from '../ui'
 import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { FirebaseAuth } from '../firebase/config'
@@ -22,7 +22,7 @@ export function AppRouter () {
   }, [])
 
   if (status === 'checking') {
-    return checkingAuth()
+    return <CheckingAuth />
   }
 
   return (

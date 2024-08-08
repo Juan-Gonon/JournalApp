@@ -34,7 +34,7 @@ export function Sidebar ({ drawerWith = 240 }) {
                   <ListItemIcon>
                     <TurnedInNot />
                   </ListItemIcon>
-                  <Grid icon>
+                  <Grid icon='true'>
                     <ListItemText primary={text} />
                     <ListItemText secondary='Cualquiera puede programar' />
                   </Grid>
