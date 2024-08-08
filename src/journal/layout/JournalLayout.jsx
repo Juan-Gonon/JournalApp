@@ -6,9 +6,11 @@ const drawerWidth = 240
 // eslint-disable-next-line react/prop-types
 export function JournalLayout ({ children }) {
   return (
-    <Box sx={{
-      display: 'flex'
-    }}
+    <Box
+      sx={{
+        display: 'flex'
+      }}
+      className='animate__animated animate__fadeIn animate__faster'
     >
       {/* Navbar */}
       <NavBar drawerWidth={drawerWidth} />
