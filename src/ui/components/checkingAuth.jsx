@@ -15,7 +15,7 @@ export function checkingAuth () {
       }}
     >
       <Grid
-        item
+        container
         direction='row'
         justifyContent='center'
       >
