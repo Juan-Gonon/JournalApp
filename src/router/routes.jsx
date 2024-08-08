@@ -18,7 +18,9 @@ export function AppRouter () {
           ? <Route path='/*' element={<JournalRoutes />} />
           : <Route path='/auth/*' element={<AuthRoutes />} />
       }
-      <Route path='/*' element={<Navigate path='/auth/login' />} />
+      {
+        status === 'not-authenticated' && <Route path='/*' element={<Navigate to='/auth/login' />} />
+      }
 
     </Routes>
   )
