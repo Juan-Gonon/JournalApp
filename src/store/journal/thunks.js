@@ -1,10 +1,11 @@
 import { newNoteFirestore } from '../../firebase/providers'
-import { addNewEmptyNote, setActiveNote } from './journalSlice'
+import { addNewEmptyNote, savingNewNote, setActiveNote } from './journalSlice'
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
     console.log('startNewNote')
     const { uid } = getState().auth
+    dispatch(savingNewNote())
     // uid
     const newNote = {
       title: '',

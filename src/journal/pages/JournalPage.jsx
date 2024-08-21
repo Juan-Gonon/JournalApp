@@ -2,10 +2,11 @@ import { IconButton } from '@mui/material'
 import { JournalLayout } from '../layout/JournalLayout'
 import { NoteView } from '../view'
 import { AddOutlined } from '@mui/icons-material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { startNewNote } from '../../store/journal'
 
 export function JournalPage () {
+  const { isSaving } = useSelector((state) => state.journal)
   const dispatch = useDispatch()
   const onClickNewNote = () => {
     dispatch(startNewNote())
@@ -29,6 +30,7 @@ export function JournalPage () {
           bottom: 50
 
         }}
+        disabled={isSaving}
       >
         <AddOutlined sx={{ fontSize: 30 }} />
       </IconButton>
