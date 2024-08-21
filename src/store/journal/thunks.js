@@ -1,6 +1,6 @@
 import { newNoteFirestore } from '../../firebase/providers'
 import { loadNotes } from '../../helpers'
-import { addNewEmptyNote, savingNewNote, setActiveNote } from './journalSlice'
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes } from './journalSlice'
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -29,6 +29,8 @@ export const startLoadingNotes = () => {
     const { uid } = getState().auth
     if (!uid) throw new Error('El UID del usuario no existe')
 
-    await loadNotes(uid)
+    const res = await loadNotes(uid)
+    // console.log(res)
+    dispatch(setNotes(res))
   }
 }
