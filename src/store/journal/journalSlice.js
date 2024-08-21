@@ -3,19 +3,39 @@ import { createSlice } from '@reduxjs/toolkit'
 export const journalSlice = createSlice({
   name: 'journalSlice',
   initialState: {
-    isSaving: true
+    isSaving: true,
+    messageSaved: '',
+    notes: [],
+    active: null
+    // active: {
+    //   id: 'ABC123',
+    //   title: '',
+    //   body: '',
+    //   date: 12345678,
+    //   imageUrls: []
+    // }
   },
   reducers: {
-    increment: (state /* action */) => {
-      //! https://react-redux.js.org/tutorials/quick-start
-      // Redux Toolkit allows us to write 'mutating' logic in reducers. It
-      // no muta realmente el estado porque usa la biblioteca Immer,
-      // que detecta cambios en un 'draft state' y produce un nuevo
-      // estado inmutable basado en esos cambios
-      state.counter += 1
+    addNewEmptyNote: (state, action) => {
+
+    },
+    setActiveNote: (state, action) => {
+
+    },
+    setNotes: (state, action) => {
+
+    },
+    setSaving: (state) => {
+
+    },
+    updateNote: (state, action) => {
+
+    },
+    deleteNodeById: (state, action) => {
+
     }
   }
 })
 
 // Los creadores de acciones se generan para cada función reductora de casos
-export const { increment } = journalSlice.actions
+export const { addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNodeById } = journalSlice.actions
