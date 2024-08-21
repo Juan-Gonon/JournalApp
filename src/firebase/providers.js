@@ -91,8 +91,15 @@ export const newNoteFirestore = async ({ uid, newNote }) => {
     //   setDocResp
     // })
 
-    return true
+    return {
+      ok: true,
+      id: newDoc.id
+
+    }
   } catch (error) {
-    return false
+    return {
+      ok: false,
+      error: error.message
+    }
   }
 }

@@ -3,12 +3,12 @@ import { JournalLayout } from '../layout/JournalLayout'
 import { NoteView } from '../view'
 import { AddOutlined } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
-import { startNewNot } from '../../store/journal'
+import { startNewNote } from '../../store/journal'
 
 export function JournalPage () {
   const dispatch = useDispatch()
   const onClickNewNote = () => {
-    dispatch(startNewNot())
+    dispatch(startNewNote())
   }
 
   return (

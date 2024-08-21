@@ -1,6 +1,6 @@
 import { newNoteFirestore } from '../../firebase/providers'
 
-export const startNewNot = () => {
+export const startNewNote = () => {
   return async (dispatch, getState) => {
     console.log('startNewNote')
     const { uid } = getState().auth
@@ -11,7 +11,9 @@ export const startNewNot = () => {
       date: new Date().getTime()
     }
 
-    newNoteFirestore({ uid, newNote })
+    const { ok, id } = await newNoteFirestore({ uid, newNote })
+    if (!ok) return
+    newNote.id = id
 
     //! dispatch
   }
