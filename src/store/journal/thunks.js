@@ -1,5 +1,4 @@
-import { collection, doc, setDoc } from 'firebase/firestore/lite'
-import { firebaseDB } from '../../firebase/config'
+import { newNoteFirestore } from '../../firebase/providers'
 
 export const startNewNot = () => {
   return async (dispatch, getState) => {
@@ -12,13 +11,7 @@ export const startNewNot = () => {
       date: new Date().getTime()
     }
 
-    const newDoc = doc(collection(firebaseDB, `${uid}/journal/notes`))
-
-    const setDocResp = await setDoc(newDoc, newNote)
-    console.log({
-      newDoc,
-      setDocResp
-    })
+    newNoteFirestore({ uid, newNote })
 
     //! dispatch
   }

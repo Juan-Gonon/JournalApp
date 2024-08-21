@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth'
-import { FirebaseAuth } from './config'
+import { FirebaseAuth, firebaseDB } from './config'
+import { collection, doc, setDoc } from 'firebase/firestore/lite'
 
 const googleProvider = new GoogleAuthProvider()
 
@@ -76,4 +77,22 @@ export const loginWithEmailPassword = async ({ email, password }) => {
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut()
+}
+
+export const newNoteFirestore = async ({ uid, newNote }) => {
+  try {
+    const newDoc = await doc(collection(firebaseDB, `${uid}/journal/notes`))
+    const setDocResp = await setDoc(newDoc, newNote)
+
+    if (setDocResp) throw new Error('Error add note firestore')
+
+    // console.log({
+    //   newDoc,
+    //   setDocResp
+    // })
+
+    return true
+  } catch (error) {
+    return false
+  }
 }
