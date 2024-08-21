@@ -1,12 +1,13 @@
+/* eslint-disable no-extra-boolean-cast */
 import { IconButton } from '@mui/material'
 import { JournalLayout } from '../layout/JournalLayout'
-import { NoteView } from '../view'
+import { NoteView, NothingSelectedView } from '../view'
 import { AddOutlined } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { startNewNote } from '../../store/journal'
 
 export function JournalPage () {
-  const { isSaving } = useSelector((state) => state.journal)
+  const { isSaving, active } = useSelector((state) => state.journal)
   const dispatch = useDispatch()
   const onClickNewNote = () => {
     dispatch(startNewNote())
@@ -14,9 +15,9 @@ export function JournalPage () {
 
   return (
     <JournalLayout>
-
-      {/* <NothingSelectedView /> */}
-      <NoteView />
+      {
+        (!!active) ? <NoteView /> : <NothingSelectedView />
+      }
 
       <IconButton
         onClick={onClickNewNote}

@@ -17,7 +17,7 @@ export function NothingSelectedView () {
         padding: 4
       }}
     >
-      <Grid item sx={12}>
+      <Grid item>
         <StarOutline sx={{
           fontSize: 100,
           color: 'white'
@@ -25,7 +25,7 @@ export function NothingSelectedView () {
         />
       </Grid>
 
-      <Grid item sx={12}>
+      <Grid item>
         <Typography color='white' variant='h5'>Selecciona o crea una entrada</Typography>
       </Grid>
     </Grid>
