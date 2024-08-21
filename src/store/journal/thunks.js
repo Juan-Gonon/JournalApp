@@ -1,4 +1,5 @@
 import { newNoteFirestore } from '../../firebase/providers'
+import { addNewEmptyNote, setActiveNote } from './journalSlice'
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -16,5 +17,7 @@ export const startNewNote = () => {
     newNote.id = id
 
     //! dispatch
+    dispatch(addNewEmptyNote(newNote))
+    dispatch(setActiveNote(newNote))
   }
 }
