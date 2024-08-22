@@ -4,7 +4,7 @@ import { ImageGallery } from '../components'
 import { useForm } from '../../hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useMemo } from 'react'
-import { setActiveNote } from '../../store/journal'
+import { setActiveNote, startSaveNote } from '../../store/journal'
 
 export function NoteView () {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ export function NoteView () {
   }, [dispatch, formState])
 
   const onSaveNote = () => {
-
+    dispatch(startSaveNote())
   }
 
   return (
