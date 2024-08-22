@@ -59,7 +59,8 @@ export const journalSlice = createSlice({
       state.active = null
     },
     deleteNodeById: (state, action) => {
-
+      state.notes = state.notes.filter((note) => note.id !== action.payload)
+      state.active = null
     }
   }
 })

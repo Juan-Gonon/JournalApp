@@ -70,12 +70,12 @@ export const startUploadingFile = (files = []) => {
 
 export const startDeletingNote = () => {
   return async (dispatch, getState) => {
-    const { uid } = getState()
-    const { active: note } = getState.journal
+    const { uid } = getState().auth
+    const { active: note } = getState().journal
 
     const docRef = await doc(firebaseDB, `${uid}/journal/notes/${note.id}`)
     await deleteDoc(docRef)
 
-    // dispatch(deleteNodeById(note.id))
+    dispatch(deleteNodeById(note.id))
   }
 }
