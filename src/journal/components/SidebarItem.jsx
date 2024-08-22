@@ -12,7 +12,7 @@ export function SidebarItem ({ note }) {
   }, [note.title])
 
   const handleClickNote = () => {
-    dispatch(setActiveNote({ ...note, imgURL: [] }))
+    dispatch(setActiveNote({ imgURL: [], ...note }))
   }
   return (
     <ListItem disablePadding>
