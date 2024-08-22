@@ -4,7 +4,7 @@ import { ImageGallery } from '../components'
 import { useForm } from '../../hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useMemo, useRef } from 'react'
-import { setActiveNote, startSaveNote } from '../../store/journal'
+import { setActiveNote, startSaveNote, startUploadingFile } from '../../store/journal'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
 
@@ -34,8 +34,8 @@ export function NoteView () {
   const onFileInputChange = ({ target }) => {
     // console.log(e.target.files)
     if (target.files === 0) return
-    // dispatch(startUploadingFile(target.files))
-    console.log(target.files)
+    dispatch(startUploadingFile(target.files))
+    // console.log(target.files)
   }
 
   const fileInputRef = useRef()
