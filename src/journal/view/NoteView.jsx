@@ -111,7 +111,9 @@ export function NoteView () {
           </Button>
         </Grid>
         {/* Image gallery */}
-        <ImageGallery images={note.imgURL} />
+        {
+          note?.imgURL && <ImageGallery images={note?.imgURL} />
+        }
 
       </Grid>
     </Grid>
