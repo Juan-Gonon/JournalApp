@@ -97,7 +97,7 @@ export function NoteView () {
         />
 
         {/* Image gallery */}
-        <ImageGallery />
+        <ImageGallery images={note.imgURL} />
 
       </Grid>
     </Grid>
