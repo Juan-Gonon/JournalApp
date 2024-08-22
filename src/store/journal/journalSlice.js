@@ -52,6 +52,12 @@ export const journalSlice = createSlice({
       state.active.imgURL = [...state.active.imgURL, ...action.payload]
       state.isSaving = false
     },
+    clearNoteLogout: (state) => {
+      state.isSaving = false
+      state.messageSaved = ''
+      state.notes = []
+      state.active = null
+    },
     deleteNodeById: (state, action) => {
 
     }
@@ -59,4 +65,4 @@ export const journalSlice = createSlice({
 })
 
 // Los creadores de acciones se generan para cada función reductora de casos
-export const { savingNewNote, setPhotosToActiveNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNodeById } = journalSlice.actions
+export const { savingNewNote, clearNoteLogout, setPhotosToActiveNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNodeById } = journalSlice.actions
