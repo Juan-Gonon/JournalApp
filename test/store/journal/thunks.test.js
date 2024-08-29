@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { startNewNote } from '../../../src/store/journal/thunks'
-import { addNewEmptyNote, savingNewNote, setActiveNote } from '../../../src/store/journal/journalSlice'
+import { startLoadingNotes, startNewNote } from '../../../src/store/journal/thunks'
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes } from '../../../src/store/journal/journalSlice'
 import { collection, deleteDoc, getDocs } from 'firebase/firestore/lite'
 import { firebaseDB } from '../../../src/firebase/config'
 
@@ -44,5 +44,25 @@ describe('Pruebas en Journal Thunks', () => {
     })
 
     await Promise.all(deletePromises)
+  })
+
+  it('startLoadingNotes debe de empezar a cargar notas', async () => {
+    const uid = 'TEST-UID'
+    getState.mockReturnValue({
+      auth: {
+        uid
+      }
+    })
+
+    await startLoadingNotes()(dispatch, getState)
+
+    expect(dispatch).toHaveBeenCalledWith(setNotes([
+      {
+        body: '',
+        date: 1724965855262,
+        id: '1osJNmQ4FY1kQHxm1JcJ',
+        title: ''
+      }
+    ]))
   })
 })
