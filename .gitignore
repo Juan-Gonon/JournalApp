@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .vscode
 src/firebase/config.js
+.env
+.env.test
