@@ -1,11 +1,18 @@
 import { Provider } from 'react-redux'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { LoginPage } from '../../../src/auth/pages/LoginPage'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import { authSlice } from '../../../src/store'
 import { MemoryRouter } from 'react-router-dom'
 import { notAuthenticatedState } from '../../fixtures/authFixtures'
+
+const mockStartGoogleSignIn = vi.fn()
+vi.mock('../../../src/store/auth/thunks', () => (
+  {
+    startGoogleSingIn: () => mockStartGoogleSignIn
+  }
+))
 
 const store = configureStore({
   reducer: {
@@ -40,7 +47,9 @@ describe('Pruebas en LoginPage', () => {
     )
 
     const googleBtn = screen.getByLabelText('google-btn')
-
+    // console.log(store.getState())
     fireEvent.click(googleBtn)
+    // console.log(store.getState())
+    expect(mockStartGoogleSignIn).toHaveBeenCalled()
   })
 })
