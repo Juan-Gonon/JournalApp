@@ -25,7 +25,7 @@ export function LoginPage () {
   }
 
   const onGoogleSingIn = () => {
-    console.log('onGoogleSingIn')
+    // console.log('onGoogleSingIn')
     dispatch(startGoogleSingIn())
   }
 
