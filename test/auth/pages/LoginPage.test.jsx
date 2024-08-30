@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { LoginPage } from '../../../src/auth/pages/LoginPage'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
@@ -8,11 +8,23 @@ import { MemoryRouter } from 'react-router-dom'
 import { notAuthenticatedState } from '../../fixtures/authFixtures'
 
 const mockStartGoogleSignIn = vi.fn()
+const mockStartLoginWithEmailPassword = vi.fn()
 vi.mock('../../../src/store/auth/thunks', () => (
   {
-    startGoogleSingIn: () => mockStartGoogleSignIn
+    startGoogleSingIn: () => mockStartGoogleSignIn,
+    startLoginWithEmailPassword: ({ email, password }) => {
+      return () => mockStartLoginWithEmailPassword({ email, password })
+    }
   }
 ))
+
+vi.mock('react-redux', async (importOriginal) => {
+  const reduxFn = await importOriginal()
+  return {
+    ...reduxFn,
+    useDispatch: () => (fn) => fn()
+  }
+})
 
 const store = configureStore({
   reducer: {
@@ -24,6 +36,9 @@ const store = configureStore({
 })
 
 describe('Pruebas en LoginPage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
   it('debe de mostrar el componente correctamente', () => {
     render(
       <MemoryRouter>
@@ -71,6 +86,11 @@ describe('Pruebas en LoginPage', () => {
     const loginForm = screen.getByLabelText('submit-form')
 
     fireEvent.submit(loginForm)
+
+    expect(mockStartLoginWithEmailPassword).toHaveBeenCalledWith({
+      email,
+      password
+    })
 
     // screen.debug()
   })
