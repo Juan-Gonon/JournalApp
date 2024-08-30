@@ -97,7 +97,7 @@ export function LoginPage () {
               xs={12}
               sm={6}
             >
-              <Button variant='contained' fullWidth onClick={onGoogleSingIn} disabled={isAuthentication}>
+              <Button aria-label='google-btn' variant='contained' fullWidth onClick={onGoogleSingIn} disabled={isAuthentication}>
                 <Google />
                 <Typography
                   variant='p' sx={{
